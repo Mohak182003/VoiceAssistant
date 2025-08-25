@@ -1,64 +1,3 @@
-# import multiprocessing
-# import os
-# import subprocess
-# import eel
-# from engine.features import hotword
-
-# # To run Jarvis
-# def startJarvis():
-#     # Code for process 1
-#     print("Process 1 is running.")
-#     # Initialize eel with the folder that contains index.html
-#     # os.chdir(os.path.dirname(__file__))
-#     eel.init('web')  # Change 'web' if your index.html is in another folder
-#     eel.start('index.html', mode='default')
-
-# # To run hotword
-# def listenHotword():
-#     # Code for process 2
-#     print("Process 2 is running.")
-#     hotword()
-
-# #  Start both processes
-# # if __name__ == '__main__':
-# #     p1 = multiprocessing.Process(target=startJarvis)
-# #     p2 = multiprocessing.Process(target=listenHotword)
-# #     p1.start()
-# #     p2.start()
-# #     p1.join()
-
-# #     if p2.is_alive():
-# #         p2.terminate()
-# #         p2.join()
-
-# if __name__ == '__main__':
-#     # Start process 1 first
-#     p1 = multiprocessing.Process(target=startJarvis)
-#     p1.start()
-#     subprocess.call([r'device.bat'])
-
-#     # Give a short delay so process 1 prints and starts before process 2
-#     import time
-#     time.sleep(1)
-
-#     # Then start process 2
-#     p2 = multiprocessing.Process(target=listenHotword)
-#     p2.start()
-
-#     # Wait for process 1 to finish
-#     p1.join()
-
-#     # When process 1 ends, stop process 2 if still running
-#     if p2.is_alive():
-#         p2.terminate()
-#         p2.join()
-
-
-#     print("system stop")
-
-
-# run.py (New Merged and Corrected File)
-
 import multiprocessing
 import os
 import subprocess
@@ -101,18 +40,7 @@ def startJarvis():
             playAssistantSound()
         else:
             speak("Face Authentication Failed")
-            # Tumhi ithe app band karu shakta kinva retry sathi option ahe
-            # For example: exit()
-            
-    # === Tumche itar @eel.expose functions ithe add kara ===
-    # Example:
-    # @eel.expose
-    # def some_other_function(param):
-    #     return f"You sent {param}"
-
-
-    # === Eel App Start karaychi command ===
-    # 'mode' ne app window madhe open hoil, browser tab madhe nahi.
+           
     try:
         eel.start(
             'index.html',

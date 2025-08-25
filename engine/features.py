@@ -89,47 +89,6 @@ def hotword():
         if paud is not None:
             paud.terminate()
 
-# def findContact(query):
-#     words_to_remove = [ASSISTANT_NAME, 'make', 'a', 'to', 'phone', 'call', 'send', 'message', 'wahtsapp', 'video']
-#     query = remove_words(query, words_to_remove)
-#     try:
-#         query = query.strip().lower()
-#         cursor.execute("SELECT mobile_no FROM contacts WHERE LOWER(name) LIKE ? OR LOWER(name) LIKE ?", ('%' + query + '%', query + '%'))
-#         results = cursor.fetchall()
-#         print(results[0][0])
-#         mobile_number_str = str(results[0][0])
-#         if not mobile_number_str.startswith('+91'):
-#             mobile_number_str = '+91' + mobile_number_str
-#         return mobile_number_str, query
-#     except:
-#         speak('not exist in contacts')
-#         return 0, 0
-
-# def whatsApp(mobile_no, message, flag, name):
-#     if flag == 'message':
-#         target_tab = 12
-#         jarvis_message = "message send successfully to "+name
-#     elif flag == 'call':
-#         target_tab = 7
-#         message = ''
-#         jarvis_message = "calling to "+name
-#     else:
-#         target_tab = 6
-#         message = ''
-#         jarvis_message = "staring video call with "+name
-
-#     encoded_message = quote(message)
-#     whatsapp_url = f"whatsapp://send?phone={mobile_no}&text={encoded_message}"
-#     full_command = f'start "" "{whatsapp_url}"'
-#     subprocess.run(full_command, shell=True)
-#     time.sleep(5)
-#     subprocess.run(full_command, shell=True)
-#     pyautogui.hotkey('ctrl', 'f')
-#     for i in range(1, target_tab):
-#         pyautogui.hotkey('tab')
-#     pyautogui.hotkey('enter')
-#     speak(jarvis_message)
-
 # Replace hugchat with Gemini
 def chatBot(query):
     user_input = query.lower()
@@ -151,26 +110,3 @@ def chatBot(query):
     speak(cleaned_response) # Aata FAKT CLEAN KELELA RESPONSE BOLAYLA DYA
     
     return response
-
-def makeCall(name, mobileNo):
-    mobileNo =mobileNo.replace(" ", "")
-    speak("Calling "+name)
-    command = 'adb shell am start -a android.intent.action.CALL -d tel:'+mobileNo
-    os.system(command)
-
-def sendMessage(message, mobileNo, name):
-    from engine.helper import replace_spaces_with_percent_s, goback, keyEvent, tapEvents, adbInput
-    message = replace_spaces_with_percent_s(message)
-    mobileNo = replace_spaces_with_percent_s(mobileNo)
-    speak("sending message")
-    goback(4)
-    time.sleep(1)
-    keyEvent(3)
-    tapEvents(473.0, 2490.3)
-    tapEvents(954.7, 2528.1)
-    adbInput(mobileNo)
-    tapEvents(396.5, 563.5)
-    tapEvents(315.0, 2557.6)
-    adbInput(message)
-    tapEvents(1105.5, 1548.4)
-    speak("message send successfully to "+name)
